@@ -1,10 +1,7 @@
 import os 
 import requests
-from url import *
+from utils import *
 from datetime import date
-
-meses = {1:'enero', 2:'febrero', 3:'marzo', 4:'abril', 5:'mayo', 6:'junio', 7:'julio', 8:'agosto', 9:'septiembre', 10:'octubre',
-        11:'noviembre', 12:'diciembre'}
 
 # Almaceno la fecha de descarga de los archivos
 hoy = date.today()

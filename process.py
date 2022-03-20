@@ -62,7 +62,6 @@ def procesar_datos():
 
     # Creo un dataframe con la información conjunta que acabo de procesar
     df_conjunto = pd.concat([df_bibliotecas, df_cines, df_museos])
-    df_conjunto = df_conjunto.assign(fecha_mod=hoy)
     df_conjunto.to_csv('df_conjunto.csv', index=False, encoding='UTF-8')
 
 if __name__ == '__main__':

@@ -1,6 +1,6 @@
 import pandas as pd 
 from datetime import date 
-from utils import *
+from src.utils import *
 
 # Almaceno la fecha de descarga de los archivos
 hoy = date.today()
@@ -41,10 +41,15 @@ def procesar_datos():
 
     
     # Creo un dataframe con la información de cines que voy a necesitar 
-    df_salas_de_cine = df_salas_de_cine[['Provincia', 'Pantallas', 'Butacas', 'espacio_INCAA']]
+    df_salas_de_cine = df_cines[['Provincia', 'Pantallas', 'Butacas', 'espacio_INCAA']]
     df_salas_de_cine.rename(
-                            {'Provincia': 'provincia', 'Pantallas': 'pantallas', 'Butacas': 'butacas', 'espacio_INCAA': 'espacios INCAA'},
+                            {'Provincia': 'provincia', 'Pantallas': 'pantallas', 'Butacas': 'butacas'},
                             inplace=True)
+    
+     # Agrego la columna correspondiente a la fecha de carga 
+    df_salas_de_cine = df_salas_de_cine.assign(fecha_carga=hoy)
+
+    # Lo guardo en un nuevo csv
     df_salas_de_cine.to_csv('df_cines.csv',index=False, encoding='UTF-8')
 
     # Cargo los datos del csv de museos
@@ -61,8 +66,13 @@ def procesar_datos():
                     'CP':'código postal','telefono':'número de teléfono'}, inplace=True)
 
     # Creo un dataframe con la información conjunta que acabo de procesar
-    df_conjunto = pd.concat([df_bibliotecas, df_cines, df_museos])
-    df_conjunto.to_csv('df_conjunto.csv', index=False, encoding='UTF-8')
+    df_unido = pd.concat([df_bibliotecas, df_cines, df_museos])
+
+    # Agrego la columna correspondiente a la fecha de carga 
+    df_unido = df_unido.assign(fecha_carga=hoy)
+
+    # Lo guardo en un nuevo csv
+    df_unido.to_csv('df_conjunto.csv', index=False, encoding='UTF-8')
 
 if __name__ == '__main__':
     procesar_datos()

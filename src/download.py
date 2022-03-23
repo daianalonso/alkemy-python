@@ -1,6 +1,6 @@
 import os 
 import requests
-from src.utils import *
+from utils import *
 from datetime import date
 
 # Almaceno la fecha de descarga de los archivos

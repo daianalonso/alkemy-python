@@ -1,6 +1,6 @@
 import pandas as pd 
 from datetime import date 
-from src.utils import *
+from utils import *
 
 # Almaceno la fecha de descarga de los archivos
 hoy = date.today()
@@ -21,7 +21,7 @@ def procesar_datos():
 
     # Renombro las columnas
     df_bibliotecas.rename(
-                        {'Cod_Loc':'cod_localidad', 'IdProvincia':'id_provincia', 'IdDepartamento':'id_departamento', 'Categoría':'categoria',
+                        columns={'Cod_Loc':'cod_localidad', 'IdProvincia':'id_provincia', 'IdDepartamento':'id_departamento', 'Categoría':'categoria',
                         'Provincia':'provincia', 'Localidad':'localidad', 'Nombre':'nombre', 'Domicilio':'domicilio', 'CP':'código postal',
                         'Teléfono':'número de teléfono', 'Mail':'mail', 'Web':'web', 'Fuente':'fuente'}, inplace=True)
 
@@ -29,21 +29,21 @@ def procesar_datos():
     carpeta = 'cines' + '/' + str(hoy.year) + '-' + meses[hoy.month]
     df_cines = pd.read_csv(carpeta + '/' + 'cines' + '-' + str(hoy.day) + '-' + str(hoy.month) + '-' + str(hoy.year) + '.csv', encoding='UTF-8')
 
+    # Creo un dataframe con la información de cines que voy a necesitar 
+    df_salas_de_cine = df_cines[['Provincia', 'Pantallas', 'Butacas', 'espacio_INCAA']]
+
     # Me quedo con las columnas de interés
     df_cines = df_cines[['Cod_Loc', 'IdProvincia', 'IdDepartamento', 'Categoría', 'Provincia', 'Localidad',
                                      'Nombre', 'Dirección', 'CP', 'Teléfono', 'Mail', 'Web', 'Fuente']]
 
     # Renombro las columnas
     df_cines.rename(
-                    {'Cod_Loc':'cod_localidad', 'IdProvincia':'id_provincia', 'IdDepartamento':'id_departamento', 'Categoría':'categoria',
+                    columns={'Cod_Loc':'cod_localidad', 'IdProvincia':'id_provincia', 'IdDepartamento':'id_departamento', 'Categoría':'categoria',
                     'Provincia':'provincia', 'Localidad':'localidad', 'Nombre':'nombre', 'Dirección':'domicilio', 'CP':'código postal',
                     'Teléfono':'número de teléfono', 'Mail':'mail', 'Web':'web', 'Fuente':'fuente'}, inplace=True)
 
-    
-    # Creo un dataframe con la información de cines que voy a necesitar 
-    df_salas_de_cine = df_cines[['Provincia', 'Pantallas', 'Butacas', 'espacio_INCAA']]
     df_salas_de_cine.rename(
-                            {'Provincia': 'provincia', 'Pantallas': 'pantallas', 'Butacas': 'butacas'},
+                            columns={'Provincia': 'provincia', 'Pantallas': 'pantallas', 'Butacas': 'butacas'},
                             inplace=True)
     
      # Agrego la columna correspondiente a la fecha de carga 
@@ -57,13 +57,13 @@ def procesar_datos():
     df_museos = pd.read_csv(carpeta + '/' + 'museos' + '-' + str(hoy.day) + '-' + str(hoy.month) + '-' + str(hoy.year) + '.csv', encoding='UTF-8')
 
     # Me quedo con las columnas de interés
-    df_museos = df_museos[['cod_loc', 'idprovincia', 'iddepartamento', 'categoria', 'provincia', 'localidad',
-                            'nombre', 'direccion', 'CP', 'telefono', 'mail', 'web', 'fuente']]
+    df_museos = df_museos[['Cod_Loc', 'IdProvincia', 'IdDepartamento', 'categoria', 'provincia', 'localidad',
+                            'nombre', 'direccion', 'CP', 'telefono', 'Mail', 'Web', 'fuente']]
 
     # Renombro las columnas
     df_museos.rename(
-                    {'cod_loc':'cod_localidad', 'idprovincia':'id_provincia', 'iddepartamento':'id_departamento', 'dirección':'domicilio',
-                    'CP':'código postal','telefono':'número de teléfono'}, inplace=True)
+                    columns={'Cod_Loc':'cod_localidad', 'IdProvincia':'id_provincia', 'IdDepartamento':'id_departamento', 'dirección':'domicilio',
+                    'CP':'código postal','telefono':'número de teléfono', 'Mail':'mail', 'Web':'web'}, inplace=True)
 
     # Creo un dataframe con la información conjunta que acabo de procesar
     df_unido = pd.concat([df_bibliotecas, df_cines, df_museos])

@@ -1,4 +1,5 @@
 import pandas as pd 
+import numpy as np
 from datetime import date 
 from utils import *
 
@@ -49,6 +50,10 @@ def procesar_datos():
      # Agrego la columna correspondiente a la fecha de carga 
     df_salas_de_cine = df_salas_de_cine.assign(fecha_carga=hoy)
 
+    # En la columna "espacio_INCAA" mayormente hay valores nulos o con el valor sí. 
+    # Los valores que dicen cero los tomo como null porque indican que no es espacio INCAA.
+    df_salas_de_cine = df_salas_de_cine.replace('0', np.nan)
+
     # Lo guardo en un nuevo csv
     df_salas_de_cine.to_csv('df_cines.csv',index=False, encoding='UTF-8')
 
@@ -70,6 +75,9 @@ def procesar_datos():
 
     # Agrego la columna correspondiente a la fecha de carga 
     df_unido = df_unido.assign(fecha_carga=hoy)
+
+    # Reemplazo los valores sin datos ("s/d") por null
+    df_unido = df_unido.replace('s/d', np.nan)
 
     # Lo guardo en un nuevo csv
     df_unido.to_csv('df_conjunto.csv', index=False, encoding='UTF-8')

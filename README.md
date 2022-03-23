@@ -24,11 +24,11 @@ pip install -r requirements.txt
 
 En `src/utils.py` modificar si es necesario las url de descarga de los archivos
 
-3. Configurar la conexión con la base de datos
+5. Configurar la conexión con la base de datos
 
 En `settings.env` completar los datos de conexión
 
-4. Ejecutar 
+6. Ejecutar 
 
 ```
 python3 app.py

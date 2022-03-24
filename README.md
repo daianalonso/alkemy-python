@@ -26,7 +26,7 @@ En `src/utils.py` modificar si es necesario las url de descarga de los archivos
 
 5. Configurar la conexión con la base de datos
 
-En `settings.env` completar los datos de conexión
+En `.env` completar los datos de conexión
 
 6. Ejecutar 
 

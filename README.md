@@ -29,3 +29,4 @@ pip install -r requirements.txt
 ```
 python3 src/app.py
 ```
+7. Los logs sobre la ejecución quedan guardados en `debug.log`

@@ -31,5 +31,5 @@ En `.env` completar los datos de conexión
 6. Ejecutar 
 
 ```
-python3 app.py
+python3 src/app.py
 ```

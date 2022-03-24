@@ -20,7 +20,7 @@ source alkemy/bin/activate
 ```
 pip install -r requirements.txt
 ```
-4. Configurar las URL de descarga: Modificar las url de descarga de los archivos en `src/utils.py` (si es necesario)
+4. Configurar las URL de descarga: Modificar en `src/utils.py` (si es necesario)
 
 5. Configurar la conexión con la base de datos: Abrir el archivo `.env` y completar los datos de conexión
 

@@ -25,8 +25,8 @@ def subir_tablas():
 
         # Subo la tabla a la base de datos
         df_registros.to_sql('cantidad_registros', con=engine, if_exists='replace', index=False, dtype={
-            'categoría':String, 'total por categoría':Integer, 'fuente':String, 'total por fuente':Integer, 'provincia':String, 
-            'categorías por provincia':Integer, 'fecha_carga':Date})
+            'categoría':String, 'total por categoría':Integer, 'fuente':String, 'total por fuente':Integer, 
+            'provincia':String, 'categorías por provincia':Integer, 'fecha_carga':Date})
 
         # Obtengo la tabla de salas de cine
         df_cines = pd.read_csv('df_cines.csv')
